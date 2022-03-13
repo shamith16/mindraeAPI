@@ -1,19 +1,19 @@
 package home
 
-type ShowHome struct {
+type TuneFindShowHome struct {
 	Shows []struct {
-		NameStub string `json:"name_stub"`
-		Name     string `json:"name"`
+		NameStub string `json:"name_stub,omitempty"`
+		Name     string `json:"name,omitempty"`
 		Image    struct {
-			Src     string `json:"src"`
-			Width   int    `json:"width"`
-			Height  int    `json:"height"`
-			Version string `json:"version"`
-		} `json:"image"`
-		SongsCount  int `json:"songs_count"`
-		SeasonCount int `json:"season_count"`
-	} `json:"shows"`
-	AiringShows  []string `json:"airing_shows"`
-	NewShows     []string `json:"new_shows"`
-	PopularShows []string `json:"popular_shows"`
+			Src     string `json:"src,omitempty"`
+			Width   int    `json:"width,omitempty"`
+			Height  int    `json:"height,omitempty"`
+			Version string `json:"version,omitempty"`
+		} `json:"image,omitempty"`
+		SongsCount  int `json:"songs_count,omitempty"`
+		SeasonCount int `json:"season_count,omitempty"`
+	} `json:"shows,omitempty"`
+	AiringShows  []string `json:"airing_shows,omitempty"`
+	NewShows     []string `json:"new_shows,omitempty"`
+	PopularShows []string `json:"popular_shows,omitempty"`
 }

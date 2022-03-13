@@ -1,6 +1,6 @@
 package search
 
-type Episode struct {
+type TuneFindEpisodeSearch struct {
 	Episode struct {
 		Id                int         `json:"id"`
 		EventGroupId      int         `json:"event_group_id"`

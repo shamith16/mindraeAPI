@@ -1,6 +1,6 @@
 package search
 
-type Movie struct {
+type TuneFindMovieSearch struct {
 	Movie struct {
 		Id            int         `json:"id"`
 		Name          string      `json:"name"`

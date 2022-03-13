@@ -1,6 +1,6 @@
 package search
 
-type Show struct {
+type TuneFindShowSearch struct {
 	Show struct {
 		NameStub string `json:"name_stub"`
 		Name     string `json:"name"`

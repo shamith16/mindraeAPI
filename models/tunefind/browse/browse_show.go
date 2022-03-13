@@ -1,6 +1,6 @@
 package browse
 
-type Show struct {
+type TuneFindShowBrowse struct {
 	Shows []struct {
 		NameStub string `json:"name_stub"`
 		Name     string `json:"name"`

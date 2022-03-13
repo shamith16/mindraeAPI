@@ -1,6 +1,6 @@
 package search
 
-type Season struct {
+type TuneFindSeasonSearch struct {
 	Season struct {
 		Id            int    `json:"id"`
 		Name          string `json:"name"`

@@ -1,6 +1,6 @@
 package browse
 
-type Game struct {
+type TuneFindGameBrowse struct {
 	Games []struct {
 		ReleaseDate string `json:"release_date"`
 		SongsCount  int    `json:"songs_count"`
