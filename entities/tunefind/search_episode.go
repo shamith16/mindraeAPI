@@ -1,6 +1,6 @@
 package tunefind
 
-type TuneFindEpisodeSearch struct {
+type EpisodeSearch struct {
 	Episode struct {
 		Id                int         `json:"id"`
 		EventGroupId      int         `json:"event_group_id"`
@@ -44,13 +44,13 @@ type TuneFindEpisodeSearch struct {
 			DateCreated string `json:"date_created"`
 			UserId      string `json:"user_id"`
 			Position    int    `json:"position"`
-			Features    struct {
-				CanAdmin        bool `json:"canAdmin"`
-				CanVote         bool `json:"canVote"`
-				CanAddSceneDesc bool `json:"canAddSceneDesc"`
-				CanAddFavorite  bool `json:"canAddFavorite"`
-				CanDelete       bool `json:"canDelete"`
-			} `json:"features"`
+			//Features    struct {
+			//	CanAdmin        bool `json:"canAdmin"`
+			//	CanVote         bool `json:"canVote"`
+			//	CanAddSceneDesc bool `json:"canAddSceneDesc"`
+			//	CanAddFavorite  bool `json:"canAddFavorite"`
+			//	CanDelete       bool `json:"canDelete"`
+			//} `json:"features"`
 			DescriptionHistory interface{} `json:"description_history"`
 			IsRight            bool        `json:"is_right"`
 			IsWrong            bool        `json:"is_wrong"`
@@ -95,8 +95,8 @@ type TuneFindEpisodeSearch struct {
 				} `json:"artists"`
 			} `json:"song"`
 		} `json:"song_events"`
-		Questions []interface{} `json:"questions"`
-		Next      struct {
+		//Questions []interface{} `json:"questions"`
+		Next struct {
 			Id                int         `json:"id"`
 			EventGroupId      int         `json:"event_group_id"`
 			Name              string      `json:"name"`
@@ -113,18 +113,18 @@ type TuneFindEpisodeSearch struct {
 		} `json:"next"`
 		Previous interface{}   `json:"previous"`
 		Votes    []interface{} `json:"votes"`
-		Features struct {
-			CanView               bool `json:"canView"`
-			CanAddSong            bool `json:"canAddSong"`
-			CanAddAlbum           bool `json:"canAddAlbum"`
-			CanAddSongDescription bool `json:"canAddSongDescription"`
-			CanDisableAuthSong    bool `json:"canDisableAuthSong"`
-			CanAddQuestion        bool `json:"canAddQuestion"`
-			CanSortSongs          bool `json:"canSortSongs"`
-			CanFollow             bool `json:"canFollow"`
-			CanAdmin              bool `json:"canAdmin"`
-			CanLock               bool `json:"canLock"`
-			CanAddTombstone       bool `json:"canAddTombstone"`
-		} `json:"features"`
+		//Features struct {
+		//	CanView               bool `json:"canView"`
+		//	CanAddSong            bool `json:"canAddSong"`
+		//	CanAddAlbum           bool `json:"canAddAlbum"`
+		//	CanAddSongDescription bool `json:"canAddSongDescription"`
+		//	CanDisableAuthSong    bool `json:"canDisableAuthSong"`
+		//	CanAddQuestion        bool `json:"canAddQuestion"`
+		//	CanSortSongs          bool `json:"canSortSongs"`
+		//	CanFollow             bool `json:"canFollow"`
+		//	CanAdmin              bool `json:"canAdmin"`
+		//	CanLock               bool `json:"canLock"`
+		//	CanAddTombstone       bool `json:"canAddTombstone"`
+		//} `json:"features"`
 	} `json:"episode"`
 }

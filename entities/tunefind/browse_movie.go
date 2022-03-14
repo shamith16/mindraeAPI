@@ -1,7 +1,7 @@
 package tunefind
 
-type TuneFindGameBrowse struct {
-	Games []struct {
+type MovieBrowse struct {
+	Movies []struct {
 		ReleaseDate string `json:"release_date"`
 		SongsCount  int    `json:"songs_count"`
 		Name        string `json:"name"`
@@ -12,5 +12,5 @@ type TuneFindGameBrowse struct {
 			Height  int    `json:"height"`
 			Version string `json:"version"`
 		} `json:"image"`
-	} `json:"games"`
+	} `json:"movies"`
 }

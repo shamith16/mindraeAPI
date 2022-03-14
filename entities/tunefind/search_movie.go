@@ -1,6 +1,6 @@
 package tunefind
 
-type TuneFindMovieSearch struct {
+type MovieSearch struct {
 	Movie struct {
 		Id            int         `json:"id"`
 		Name          string      `json:"name"`
@@ -20,19 +20,19 @@ type TuneFindMovieSearch struct {
 		} `json:"image"`
 		SongsCount  int    `json:"songs_count"`
 		ReleaseDate string `json:"release_date"`
-		Features    struct {
-			CanView               bool `json:"canView"`
-			CanAddSong            bool `json:"canAddSong"`
-			CanAddAlbum           bool `json:"canAddAlbum"`
-			CanAddSongDescription bool `json:"canAddSongDescription"`
-			CanDisableAuthSong    bool `json:"canDisableAuthSong"`
-			CanAddQuestion        bool `json:"canAddQuestion"`
-			CanSortSongs          bool `json:"canSortSongs"`
-			CanFollow             bool `json:"canFollow"`
-			CanAdmin              bool `json:"canAdmin"`
-			CanLock               bool `json:"canLock"`
-			CanAddTombstone       bool `json:"canAddTombstone"`
-		} `json:"features"`
+		//Features    struct {
+		//	CanView               bool `json:"canView"`
+		//	CanAddSong            bool `json:"canAddSong"`
+		//	CanAddAlbum           bool `json:"canAddAlbum"`
+		//	CanAddSongDescription bool `json:"canAddSongDescription"`
+		//	CanDisableAuthSong    bool `json:"canDisableAuthSong"`
+		//	CanAddQuestion        bool `json:"canAddQuestion"`
+		//	CanSortSongs          bool `json:"canSortSongs"`
+		//	CanFollow             bool `json:"canFollow"`
+		//	CanAdmin              bool `json:"canAdmin"`
+		//	CanLock               bool `json:"canLock"`
+		//	CanAddTombstone       bool `json:"canAddTombstone"`
+		//} `json:"features"`
 		Event struct {
 			Id                int         `json:"id"`
 			EventGroupId      int         `json:"event_group_id"`
@@ -66,19 +66,19 @@ type TuneFindMovieSearch struct {
 					Version string `json:"version"`
 				} `json:"image"`
 			} `json:"event_group"`
-			Features struct {
-				CanView               bool `json:"canView"`
-				CanAddSong            bool `json:"canAddSong"`
-				CanAddAlbum           bool `json:"canAddAlbum"`
-				CanAddSongDescription bool `json:"canAddSongDescription"`
-				CanDisableAuthSong    bool `json:"canDisableAuthSong"`
-				CanAddQuestion        bool `json:"canAddQuestion"`
-				CanSortSongs          bool `json:"canSortSongs"`
-				CanFollow             bool `json:"canFollow"`
-				CanAdmin              bool `json:"canAdmin"`
-				CanLock               bool `json:"canLock"`
-				CanAddTombstone       bool `json:"canAddTombstone"`
-			} `json:"features"`
+			//Features struct {
+			//	CanView               bool `json:"canView"`
+			//	CanAddSong            bool `json:"canAddSong"`
+			//	CanAddAlbum           bool `json:"canAddAlbum"`
+			//	CanAddSongDescription bool `json:"canAddSongDescription"`
+			//	CanDisableAuthSong    bool `json:"canDisableAuthSong"`
+			//	CanAddQuestion        bool `json:"canAddQuestion"`
+			//	CanSortSongs          bool `json:"canSortSongs"`
+			//	CanFollow             bool `json:"canFollow"`
+			//	CanAdmin              bool `json:"canAdmin"`
+			//	CanLock               bool `json:"canLock"`
+			//	CanAddTombstone       bool `json:"canAddTombstone"`
+			//} `json:"features"`
 		} `json:"event"`
 	} `json:"movie"`
 	SongEvents []struct {
@@ -88,13 +88,13 @@ type TuneFindMovieSearch struct {
 		DateCreated string `json:"date_created"`
 		UserId      string `json:"user_id"`
 		Position    int    `json:"position"`
-		Features    struct {
-			CanAdmin        bool `json:"canAdmin"`
-			CanVote         bool `json:"canVote"`
-			CanAddSceneDesc bool `json:"canAddSceneDesc"`
-			CanAddFavorite  bool `json:"canAddFavorite"`
-			CanDelete       bool `json:"canDelete"`
-		} `json:"features"`
+		//Features    struct {
+		//	CanAdmin        bool `json:"canAdmin"`
+		//	CanVote         bool `json:"canVote"`
+		//	CanAddSceneDesc bool `json:"canAddSceneDesc"`
+		//	CanAddFavorite  bool `json:"canAddFavorite"`
+		//	CanDelete       bool `json:"canDelete"`
+		//} `json:"features"`
 		DescriptionHistory interface{} `json:"description_history"`
 		IsRight            bool        `json:"is_right"`
 		IsWrong            bool        `json:"is_wrong"`
@@ -139,7 +139,7 @@ type TuneFindMovieSearch struct {
 			} `json:"artists"`
 		} `json:"song"`
 	} `json:"song_events"`
-	Votes     []interface{} `json:"votes"`
-	HotSongs  []interface{} `json:"hot_songs"`
-	Following bool          `json:"following"`
+	Votes    []interface{} `json:"votes"`
+	HotSongs []interface{} `json:"hot_songs"`
+	//Following bool          `json:"following"`
 }

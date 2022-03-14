@@ -1,6 +1,6 @@
 package tunefind
 
-type TuneFindMovieGameHome struct {
+type MovieGameHome struct {
 	Slider        []string `json:"slider,omitempty"`
 	Featured      []string `json:"featured,omitempty"`
 	RecentlyAdded []string `json:"recently_added,omitempty"`

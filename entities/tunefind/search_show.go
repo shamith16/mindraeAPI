@@ -1,6 +1,6 @@
 package tunefind
 
-type TuneFindShowSearch struct {
+type ShowSearch struct {
 	Show struct {
 		NameStub string `json:"name_stub"`
 		Name     string `json:"name"`
@@ -10,9 +10,9 @@ type TuneFindShowSearch struct {
 			Height  int    `json:"height"`
 			Version string `json:"version"`
 		} `json:"image"`
-		Features struct {
-			CanFollow bool `json:"canFollow"`
-		} `json:"features"`
+		//Features struct {
+		//	CanFollow bool `json:"canFollow"`
+		//} `json:"features"`
 	} `json:"show"`
 	Seasons []struct {
 		Id            int    `json:"id"`
@@ -31,9 +31,9 @@ type TuneFindShowSearch struct {
 			Height  int    `json:"height"`
 			Version string `json:"version"`
 		} `json:"image"`
-		SeasonFeatures struct {
-			CanAdmin bool `json:"canAdmin"`
-		} `json:"season_features"`
+		//SeasonFeatures struct {
+		//	CanAdmin bool `json:"canAdmin"`
+		//} `json:"season_features"`
 		SongsCount       int           `json:"songs_count"`
 		EpisodesCount    int           `json:"episodes_count"`
 		MusicSupervisors []interface{} `json:"music_supervisors"`
@@ -71,7 +71,7 @@ type TuneFindShowSearch struct {
 			} `json:"artists"`
 		} `json:"theme_song"`
 	} `json:"seasons"`
-	Following     bool `json:"following"`
+	//Following     bool `json:"following"`
 	LatestEpisode struct {
 		Id                int         `json:"id"`
 		EventGroupId      int         `json:"event_group_id"`

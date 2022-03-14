@@ -1,6 +1,6 @@
 package tunefind
 
-type TuneFindShowBrowse struct {
+type ShowHome struct {
 	Shows []struct {
 		NameStub string `json:"name_stub"`
 		Name     string `json:"name"`
@@ -13,4 +13,7 @@ type TuneFindShowBrowse struct {
 		SongsCount  int `json:"songs_count"`
 		SeasonCount int `json:"season_count"`
 	} `json:"shows"`
+	AiringShows  []string `json:"airing_shows"`
+	NewShows     []string `json:"new_shows"`
+	PopularShows []string `json:"popular_shows"`
 }

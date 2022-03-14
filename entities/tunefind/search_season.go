@@ -1,6 +1,6 @@
 package tunefind
 
-type TuneFindSeasonSearch struct {
+type SeasonSearch struct {
 	Season struct {
 		Id            int    `json:"id"`
 		Name          string `json:"name"`
@@ -18,9 +18,9 @@ type TuneFindSeasonSearch struct {
 			Height  int    `json:"height"`
 			Version string `json:"version"`
 		} `json:"image"`
-		SeasonFeatures struct {
-			CanAdmin bool `json:"canAdmin"`
-		} `json:"season_features"`
+		//SeasonFeatures struct {
+		//	CanAdmin bool `json:"canAdmin"`
+		//} `json:"season_features"`
 		SongsCount int `json:"songs_count"`
 	} `json:"season"`
 	Episodes []struct {
@@ -75,19 +75,19 @@ type TuneFindSeasonSearch struct {
 		Embargo           bool `json:"embargo"`
 		QuestionCount     int  `json:"question_count"`
 		SongsCount        int  `json:"songs_count"`
-		Features          struct {
-			CanView               bool `json:"canView"`
-			CanAddSong            bool `json:"canAddSong"`
-			CanAddAlbum           bool `json:"canAddAlbum"`
-			CanAddSongDescription bool `json:"canAddSongDescription"`
-			CanDisableAuthSong    bool `json:"canDisableAuthSong"`
-			CanAddQuestion        bool `json:"canAddQuestion"`
-			CanSortSongs          bool `json:"canSortSongs"`
-			CanFollow             bool `json:"canFollow"`
-			CanAdmin              bool `json:"canAdmin"`
-			CanLock               bool `json:"canLock"`
-			CanAddTombstone       bool `json:"canAddTombstone"`
-		} `json:"features"`
+		//Features          struct {
+		//	CanView               bool `json:"canView"`
+		//	CanAddSong            bool `json:"canAddSong"`
+		//	CanAddAlbum           bool `json:"canAddAlbum"`
+		//	CanAddSongDescription bool `json:"canAddSongDescription"`
+		//	CanDisableAuthSong    bool `json:"canDisableAuthSong"`
+		//	CanAddQuestion        bool `json:"canAddQuestion"`
+		//	CanSortSongs          bool `json:"canSortSongs"`
+		//	CanFollow             bool `json:"canFollow"`
+		//	CanAdmin              bool `json:"canAdmin"`
+		//	CanLock               bool `json:"canLock"`
+		//	CanAddTombstone       bool `json:"canAddTombstone"`
+		//} `json:"features"`
 	} `json:"episodes"`
 	ThemeSong struct {
 		Id         int    `json:"id"`
