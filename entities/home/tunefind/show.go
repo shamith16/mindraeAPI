@@ -1,4 +1,4 @@
-package home
+package tunefind
 
 type TuneFindShowHome struct {
 	Shows []struct {

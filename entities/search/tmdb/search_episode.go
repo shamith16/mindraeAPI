@@ -1,4 +1,4 @@
-package search
+package tmdb
 
 type TmdbEpisodeSearch struct {
 	AirDate string `json:"air_date,omitempty"`

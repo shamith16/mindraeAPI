@@ -1,4 +1,4 @@
-package browse
+package tunefind
 
 type TuneFindShowBrowse struct {
 	Shows []struct {

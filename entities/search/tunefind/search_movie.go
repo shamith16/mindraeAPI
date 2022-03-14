@@ -1,4 +1,4 @@
-package search
+package tunefind
 
 type TuneFindMovieSearch struct {
 	Movie struct {

@@ -1,4 +1,4 @@
-package trending
+package tunefind
 
 type TrendingSongs struct {
 	Songs []struct {

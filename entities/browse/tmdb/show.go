@@ -1,4 +1,4 @@
-package browse
+package tmdb
 
 type TmdbShowBrowse struct {
 	Page    int `json:"page,omitempty"`

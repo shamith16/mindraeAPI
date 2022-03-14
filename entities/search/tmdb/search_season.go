@@ -1,4 +1,4 @@
-package search
+package tmdb
 
 type TmdbSeasonSearch struct {
 	Id       string `json:"_id,omitempty"`

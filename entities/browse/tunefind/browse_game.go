@@ -1,4 +1,4 @@
-package browse
+package tunefind
 
 type TuneFindGameBrowse struct {
 	Games []struct {

@@ -1,4 +1,4 @@
-package search
+package tunefind
 
 type TuneFindSeasonSearch struct {
 	Season struct {

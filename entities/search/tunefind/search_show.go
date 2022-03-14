@@ -1,4 +1,4 @@
-package search
+package tunefind
 
 type TuneFindShowSearch struct {
 	Show struct {
