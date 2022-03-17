@@ -55,39 +55,7 @@ type SeasonSearch struct {
 				Version string `json:"version"`
 			} `json:"image"`
 		} `json:"event_group"`
-		Tombstone *struct {
-			Id          int    `json:"id"`
-			EventId     int    `json:"event_id"`
-			DateCreated string `json:"date_created"`
-			UserId      string `json:"user_id"`
-			IsRight     bool   `json:"is_right"`
-			IsWrong     bool   `json:"is_wrong"`
-			IsForVote   bool   `json:"is_for_vote"`
-			Locked      bool   `json:"locked"`
-			Features    struct {
-				CanAdmin  bool `json:"canAdmin"`
-				CanVote   bool `json:"canVote"`
-				CanDelete bool `json:"canDelete"`
-			} `json:"features"`
-		} `json:"tombstone"`
-		TombstoneConflict bool `json:"tombstone_conflict"`
-		HasRightTombstone bool `json:"has_right_tombstone"`
-		Embargo           bool `json:"embargo"`
-		QuestionCount     int  `json:"question_count"`
-		SongsCount        int  `json:"songs_count"`
-		//Features          struct {
-		//	CanView               bool `json:"canView"`
-		//	CanAddSong            bool `json:"canAddSong"`
-		//	CanAddAlbum           bool `json:"canAddAlbum"`
-		//	CanAddSongDescription bool `json:"canAddSongDescription"`
-		//	CanDisableAuthSong    bool `json:"canDisableAuthSong"`
-		//	CanAddQuestion        bool `json:"canAddQuestion"`
-		//	CanSortSongs          bool `json:"canSortSongs"`
-		//	CanFollow             bool `json:"canFollow"`
-		//	CanAdmin              bool `json:"canAdmin"`
-		//	CanLock               bool `json:"canLock"`
-		//	CanAddTombstone       bool `json:"canAddTombstone"`
-		//} `json:"features"`
+		SongsCount int `json:"songs_count"`
 	} `json:"episodes"`
 	ThemeSong struct {
 		Id         int    `json:"id"`

@@ -10,9 +10,6 @@ type ShowSearch struct {
 			Height  int    `json:"height"`
 			Version string `json:"version"`
 		} `json:"image"`
-		//Features struct {
-		//	CanFollow bool `json:"canFollow"`
-		//} `json:"features"`
 	} `json:"show"`
 	Seasons []struct {
 		Id            int    `json:"id"`
@@ -31,13 +28,11 @@ type ShowSearch struct {
 			Height  int    `json:"height"`
 			Version string `json:"version"`
 		} `json:"image"`
-		//SeasonFeatures struct {
-		//	CanAdmin bool `json:"canAdmin"`
-		//} `json:"season_features"`
-		SongsCount       int           `json:"songs_count"`
-		EpisodesCount    int           `json:"episodes_count"`
-		MusicSupervisors []interface{} `json:"music_supervisors"`
-		Composers        []interface{} `json:"composers"`
+
+		SongsCount       int                         `json:"songs_count"`
+		EpisodesCount    int                         `json:"episodes_count"`
+		MusicSupervisors []MusicSupervisorsComposers `json:"music_supervisors"`
+		Composers        []MusicSupervisorsComposers `json:"composers"`
 		ThemeSong        struct {
 			Id         int    `json:"id"`
 			Name       string `json:"name"`
@@ -71,7 +66,6 @@ type ShowSearch struct {
 			} `json:"artists"`
 		} `json:"theme_song"`
 	} `json:"seasons"`
-	//Following     bool `json:"following"`
 	LatestEpisode struct {
 		Id                int         `json:"id"`
 		EventGroupId      int         `json:"event_group_id"`
@@ -88,4 +82,16 @@ type ShowSearch struct {
 		IsAired           bool        `json:"is_aired"`
 		SongsCount        int         `json:"songs_count"`
 	} `json:"latest_episode"`
+}
+
+type MusicSupervisorsComposers struct {
+	Id       int    `json:"id"`
+	Name     string `json:"name"`
+	NameStub string `json:"name_stub"`
+	Image    struct {
+		Src     string `json:"src"`
+		Width   int    `json:"width"`
+		Height  int    `json:"height"`
+		Version string `json:"version"`
+	} `json:"image"`
 }
