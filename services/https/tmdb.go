@@ -2,6 +2,7 @@ package https
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/shamith16/mindraeAPI/constants"
 	"github.com/shamith16/mindraeAPI/entities/tmdb"
 	"io"
@@ -10,144 +11,145 @@ import (
 	"strconv"
 )
 
-func TmdbMovieBrowse(name string, year string, tmdbMovieBrowse *tmdb.MovieBrowse) (err error) {
+func TmdbMovieBrowse(name string, year int) (tmdbMovieBrowse tmdb.ShowMovieBrowse, err error) {
+	link := fmt.Sprintf("%s&query=%s&year=%d&primary_release_year=%d", constants.TmdbMovieBrowseURL, name, year, year)
+	response, err := http.Get(link)
 
-	response, err := http.Get(constants.TmdbMovieBrowse + "&query=" + name + "&year=" + year + "&primary_release_year=" + year)
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(response.Body)
 	if err != nil {
-		return err
+		return tmdbMovieBrowse, err
 	} else {
 		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
-			return err
+			return tmdbMovieBrowse, err
 		} else {
-			err = json.Unmarshal(body, tmdbMovieBrowse)
+			err = json.Unmarshal(body, &tmdbMovieBrowse)
 			if err != nil {
-				return err
+				return tmdbMovieBrowse, err
 			} else {
-				return err
+				return tmdbMovieBrowse, err
 			}
 		}
 
 	}
 }
 
-func TmdbShowBrowse(name string, tmdbShowBrowse *tmdb.ShowBrowse) (err error) {
+func TmdbShowBrowse(name string) (tmdbShowBrowse tmdb.ShowMovieBrowse, err error) {
 
-	response, err := http.Get(constants.TmdbShowBrowse + "&query=" + name)
+	response, err := http.Get(constants.TmdbShowBrowseURL + "&query=" + name)
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(response.Body)
 	if err != nil {
-		return err
+		return tmdbShowBrowse, err
 	} else {
 		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
-			return err
+			return tmdbShowBrowse, err
 		} else {
-			err = json.Unmarshal(body, tmdbShowBrowse)
+			err = json.Unmarshal(body, &tmdbShowBrowse)
 			if err != nil {
-				return err
+				return tmdbShowBrowse, err
 			} else {
-				return err
+				return tmdbShowBrowse, err
 			}
 		}
 
 	}
 }
 
-func TmdbMovieSearch(id int, tmdbMovieSearch *tmdb.MovieSearch) (err error) {
+func TmdbMovieSearch(id int) (tmdbMovieSearch tmdb.MovieSearch, err error) {
 
-	response, err := http.Get(constants.TmdbMovieSearch + strconv.Itoa(id) + "?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US&append_to_response=credits,external_ids,images,keywords,translations,videos")
+	response, err := http.Get(constants.TmdbMovieSearchURL + strconv.Itoa(id) + "?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US&append_to_response=credits,external_ids,images,keywords,translations,videos")
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(response.Body)
 	if err != nil {
-		return err
+		return tmdbMovieSearch, err
 	} else {
 		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
-			return err
+			return tmdbMovieSearch, err
 		} else {
-			err = json.Unmarshal(body, tmdbMovieSearch)
+			err = json.Unmarshal(body, &tmdbMovieSearch)
 			if err != nil {
-				return err
+				return tmdbMovieSearch, err
 			} else {
-				return err
+				return tmdbMovieSearch, err
 			}
 		}
 
 	}
 }
 
-func TmdbShowSearch(showID int, tmdbShowSearch *tmdb.ShowSearch) (err error) {
+func TmdbShowSearch(showID int) (tmdbShowSearch *tmdb.ShowSearch, err error) {
 
-	response, err := http.Get(constants.TmdbShowSearch + strconv.Itoa(showID) + "?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US&append_to_response=credits,episode_groups,external_ids,images,keywords,translations,videos,")
+	response, err := http.Get(constants.TmdbShowURL + strconv.Itoa(showID) + "?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US&append_to_response=credits,episode_groups,external_ids,images,keywords,translations,videos,")
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(response.Body)
 	if err != nil {
-		return err
+		return tmdbShowSearch, err
 	} else {
 		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
-			return err
+			return tmdbShowSearch, err
 		} else {
 			err = json.Unmarshal(body, tmdbShowSearch)
 			if err != nil {
-				return err
+				return tmdbShowSearch, err
 			} else {
-				return err
+				return tmdbShowSearch, err
 			}
 		}
 
 	}
 }
 
-func TmdbSeasonSearch(showID int, seasonNumber int, tmdbSeasonSearch *tmdb.SeasonSearch) (err error) {
+func TmdbSeasonSearch(showID int, seasonNumber int) (tmdbSeasonSearch *tmdb.SeasonSearch, err error) {
 
-	response, err := http.Get(constants.TmdbSeasonSearch + strconv.Itoa(showID) + "/season/" + strconv.Itoa(seasonNumber) + "?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US")
+	response, err := http.Get(constants.TmdbShowURL + strconv.Itoa(showID) + "/season/" + strconv.Itoa(seasonNumber) + "?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US")
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(response.Body)
 	if err != nil {
-		return err
+		return tmdbSeasonSearch, err
 	} else {
 		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
-			return err
+			return tmdbSeasonSearch, err
 		} else {
 			err = json.Unmarshal(body, tmdbSeasonSearch)
 			if err != nil {
-				return err
+				return tmdbSeasonSearch, err
 			} else {
-				return err
+				return tmdbSeasonSearch, err
 			}
 		}
 
 	}
 }
 
-func TmdbEpisodeSearch(showID int, seasonNumber int, episodeNumber int, tmdbEpisodeSearch *tmdb.EpisodeSearch) (err error) {
+func TmdbEpisodeSearch(showID int, seasonNumber int, episodeNumber int) (tmdbEpisodeSearch *tmdb.Episodes, err error) {
 
-	response, err := http.Get(constants.TmdbEpisodeSearch + strconv.Itoa(showID) + "/season/" + strconv.Itoa(seasonNumber) + "/episode/" + strconv.Itoa(episodeNumber) + "?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US")
+	response, err := http.Get(constants.TmdbShowURL + strconv.Itoa(showID) + "/season/" + strconv.Itoa(seasonNumber) + "/episode/" + strconv.Itoa(episodeNumber) + "?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US")
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(response.Body)
 	if err != nil {
-		return err
+		return tmdbEpisodeSearch, err
 	} else {
 		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
-			return err
+			return tmdbEpisodeSearch, err
 		} else {
 			err = json.Unmarshal(body, tmdbEpisodeSearch)
 			if err != nil {
-				return err
+				return tmdbEpisodeSearch, err
 			} else {
-				return err
+				return tmdbEpisodeSearch, err
 			}
 		}
 
