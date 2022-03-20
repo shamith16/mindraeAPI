@@ -17,7 +17,7 @@ func main() {
 	})
 
 	c.Start()
-	app.Static("/showhome", "scratches/movie-home.json")
+	app.Static("/showhome", "movie-home.json")
 	app.Listen(":6969")
 
 }
