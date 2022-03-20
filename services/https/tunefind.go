@@ -10,78 +10,6 @@ import (
 	"strconv"
 )
 
-func TuneFindMovieBrowse() (tunefindMovieBrowse tunefind.MovieBrowse, err error) {
-
-	response, err := http.Get(constants.TuneFindBrowseAllMovie)
-	defer func(Body io.ReadCloser) {
-		_ = Body.Close()
-	}(response.Body)
-	if err != nil {
-		return tunefindMovieBrowse, err
-	} else {
-		body, err := ioutil.ReadAll(response.Body)
-		if err != nil {
-			return tunefindMovieBrowse, err
-		} else {
-			err = json.Unmarshal(body, &tunefindMovieBrowse)
-			if err != nil {
-				return tunefindMovieBrowse, err
-			} else {
-				return tunefindMovieBrowse, err
-			}
-		}
-
-	}
-}
-
-func TuneFindShowBrowse() (tunefindShowBrowse tunefind.ShowBrowse, err error) {
-
-	response, err := http.Get(constants.TuneFindBrowseAllShow)
-	defer func(Body io.ReadCloser) {
-		_ = Body.Close()
-	}(response.Body)
-	if err != nil {
-		return tunefindShowBrowse, err
-	} else {
-		body, err := ioutil.ReadAll(response.Body)
-		if err != nil {
-			return tunefindShowBrowse, err
-		} else {
-			err = json.Unmarshal(body, &tunefindShowBrowse)
-			if err != nil {
-				return tunefindShowBrowse, err
-			} else {
-				return tunefindShowBrowse, err
-			}
-		}
-
-	}
-}
-
-func TuneFindGameBrowse() (tunefindGameBrowse tunefind.GameBrowse, err error) {
-
-	response, err := http.Get(constants.TuneFindBrowseAllGame)
-	defer func(Body io.ReadCloser) {
-		_ = Body.Close()
-	}(response.Body)
-	if err != nil {
-		return tunefindGameBrowse, err
-	} else {
-		body, err := ioutil.ReadAll(response.Body)
-		if err != nil {
-			return tunefindGameBrowse, err
-		} else {
-			err = json.Unmarshal(body, &tunefindGameBrowse)
-			if err != nil {
-				return tunefindGameBrowse, err
-			} else {
-				return tunefindGameBrowse, err
-			}
-		}
-
-	}
-}
-
 func TuneFindShowHome() (tunefindShowHome tunefind.ShowHome, err error) {
 
 	response, err := http.Get(constants.TuneFindShowHome)
@@ -148,6 +76,78 @@ func TuneFindGameHome() (tunefindGameHome tunefind.MovieGameHome, err error) {
 				return tunefindGameHome, err
 			} else {
 				return tunefindGameHome, err
+			}
+		}
+
+	}
+}
+
+func TuneFindShowBrowse() (tunefindShowBrowse tunefind.ShowBrowse, err error) {
+
+	response, err := http.Get(constants.TuneFindBrowseAllShow)
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(response.Body)
+	if err != nil {
+		return tunefindShowBrowse, err
+	} else {
+		body, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			return tunefindShowBrowse, err
+		} else {
+			err = json.Unmarshal(body, &tunefindShowBrowse)
+			if err != nil {
+				return tunefindShowBrowse, err
+			} else {
+				return tunefindShowBrowse, err
+			}
+		}
+
+	}
+}
+
+func TuneFindMovieBrowse() (tunefindMovieBrowse tunefind.MovieBrowse, err error) {
+
+	response, err := http.Get(constants.TuneFindBrowseAllMovie)
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(response.Body)
+	if err != nil {
+		return tunefindMovieBrowse, err
+	} else {
+		body, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			return tunefindMovieBrowse, err
+		} else {
+			err = json.Unmarshal(body, &tunefindMovieBrowse)
+			if err != nil {
+				return tunefindMovieBrowse, err
+			} else {
+				return tunefindMovieBrowse, err
+			}
+		}
+
+	}
+}
+
+func TuneFindGameBrowse() (tunefindGameBrowse tunefind.GameBrowse, err error) {
+
+	response, err := http.Get(constants.TuneFindBrowseAllGame)
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(response.Body)
+	if err != nil {
+		return tunefindGameBrowse, err
+	} else {
+		body, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			return tunefindGameBrowse, err
+		} else {
+			err = json.Unmarshal(body, &tunefindGameBrowse)
+			if err != nil {
+				return tunefindGameBrowse, err
+			} else {
+				return tunefindGameBrowse, err
 			}
 		}
 
