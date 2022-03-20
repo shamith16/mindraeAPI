@@ -35,8 +35,8 @@ func TmdbShowBrowse(name string) (tmdbShowBrowse tmdb.ShowMovieBrowse, err error
 	}
 }
 
-func TmdbMovieBrowse(name string, year int) (tmdbMovieBrowse tmdb.ShowMovieBrowse, err error) {
-	link := fmt.Sprintf("%s&query=%s&year=%d&primary_release_year=%d",
+func TmdbMovieBrowse(name string, year string) (tmdbMovieBrowse tmdb.ShowMovieBrowse, err error) {
+	link := fmt.Sprintf("%s&query=%s&year=%s&primary_release_year=%s",
 		constants.TmdbMovieBrowseURL, name, year, year)
 	response, err := http.Get(link)
 

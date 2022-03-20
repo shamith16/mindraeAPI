@@ -17,7 +17,6 @@ type Movie struct {
 	AirDateStart  int64  `json:"air_date_start"`
 	AirDateEnd    int64  `json:"air_date_end"`
 	TypeFull      string `json:"type_full"`
-	Image         Image  `json:"image"`
 	SongsCount    int64  `json:"songs_count"`
 	ReleaseDate   string `json:"release_date"`
 	Event         Event  `json:"event"`

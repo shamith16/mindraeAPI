@@ -36,7 +36,6 @@ type EventGroup struct {
 	AirDateStart  int64       `json:"air_date_start"`
 	AirDateEnd    int64       `json:"air_date_end"`
 	TypeFull      string      `json:"type_full"`
-	Image         Image       `json:"image"`
 }
 
 type Next struct {
@@ -95,7 +94,6 @@ type Artist struct {
 	ID       int64  `json:"id"`
 	Name     string `json:"name"`
 	NameStub string `json:"name_stub"`
-	Image    Image  `json:"image"`
 }
 
 type URL struct {

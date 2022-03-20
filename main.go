@@ -1,12 +1,13 @@
 package main
 
-import "sync"
-
-var wg3 sync.WaitGroup
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/shamith16/mindraeAPI/services/https"
+)
 
 func main() {
-	wg3.Add(2)
-	FetchTmdb(&wg3)
-	fetchTuneFind(&wg3)
-	wg3.Wait()
+	app := fiber.New()
+	app.Static("/showhome", "scratches/movie-home.json")
+	https.MindraeMovieHome()
+	app.Listen(":6969")
 }
