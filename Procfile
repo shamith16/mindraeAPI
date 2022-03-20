@@ -1,1 +1,1 @@
-worker: bin/mindraeAPI
+web: bin/mindraeAPI

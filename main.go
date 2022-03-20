@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-	https.MindraeMovieHome()
 	app := fiber.New()
 	https.MindraeMovieHome()
 	c := cron.New()
