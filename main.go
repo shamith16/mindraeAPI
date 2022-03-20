@@ -12,10 +12,11 @@ func main() {
 	app := fiber.New()
 	https.MindraeMovieHome()
 	c := cron.New()
-	_, _ = c.AddFunc("90 * * * *", func() {
+	c.AddFunc("90 * * * *", func() {
 		fmt.Println("Cron job started")
 		https.MindraeMovieHome()
 	})
+
 	c.Start()
 	app.Static("/showhome", "scratches/movie-home.json")
 	app.Listen(":6969")
