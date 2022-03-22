@@ -8,7 +8,7 @@ import (
 func WriteToFile(filename string, data []byte) (err error) {
 
 	file, err := os.OpenFile(
-		filename,
+		"jsons/"+filename,
 		os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
 		0666,
 	)

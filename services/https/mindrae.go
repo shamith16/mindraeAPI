@@ -226,6 +226,7 @@ func filterMovieFromResults(tunefind *tunefind.MovieSearch) {
 			VoteCount:             int64(tmdbMovie.VoteCount),
 			ExternalIds:           tmdbMovie.ExternalIds,
 			Videos:                tmdbMovie.Videos,
+			Images:                tmdbMovie.Images,
 		})
 	}
 

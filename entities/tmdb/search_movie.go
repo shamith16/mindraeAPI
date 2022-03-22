@@ -73,7 +73,9 @@ type MovieSearch struct {
 	//		} `json:"data"`
 	//	} `json:"translations"`
 	//} `json:"translations"`
-	Videos struct {
-		Results []VideoResults `json:"results"`
-	} `json:"videos"`
+	Videos Videos `json:"videos"`
+}
+
+type Videos struct {
+	Results []VideoResults `json:"results"`
 }
