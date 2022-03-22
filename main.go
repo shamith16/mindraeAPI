@@ -13,16 +13,18 @@ const PORT = "3000"
 func main() {
 	app := fiber.New()
 	port := getEnv("PORT", PORT)
-	https.MindraeMovieHome()
+
 	c := cron.New()
-	c.AddFunc("90 * * * *", func() {
+	c.AddFunc("120 * * * *", func() {
 		fmt.Println("Cron job started")
-		https.MindraeMovieHome()
+		https.MovieHome()
 	})
 
 	c.Start()
-	app.Static("/showhome", "movie-home.json")
-	app.Listen(fmt.Sprintf(":%s", port))
+	app.Static("/moviehome", "jsons/movie-home.json")
+	_ = app.Listen(fmt.Sprintf(":%s", port))
+	https.MovieHome()
+
 }
 
 // Gets default value passed if no value exist for given environment variable.
