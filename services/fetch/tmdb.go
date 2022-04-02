@@ -1,4 +1,4 @@
-package https
+package fetch
 
 import (
 	"encoding/json"

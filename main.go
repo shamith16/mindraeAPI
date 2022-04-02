@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/robfig/cron"
-	"github.com/shamith16/mindraeAPI/services/https"
+	"github.com/shamith16/mindraeAPI/services/fetch"
 	"github.com/shamith16/mindraeAPI/utils"
 	"os"
 	"time"
@@ -19,7 +19,7 @@ func init() {
 	os.Setenv("TZ", "Asia/Kolkata")
 	time.AfterFunc(3*time.Minute, func() {
 		_ = utils.WriteToFile("logs.txt", []byte("Running MovieHome() after 3 minutes"), "logs", "append")
-		https.MovieHome()
+		fetch.MovieHome()
 
 	})
 }
@@ -32,7 +32,7 @@ func main() {
 
 	c.AddFunc(string(MIN)+"* * * *", func() {
 		fmt.Println("Cron job started")
-		https.MovieHome()
+		fetch.MovieHome()
 	})
 
 	c.Start()
