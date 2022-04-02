@@ -18,7 +18,9 @@ const MIN = 360
 func init() {
 	os.Setenv("TZ", "Asia/Kolkata")
 	time.AfterFunc(3*time.Minute, func() {
+		_ = utils.WriteToFile("logs.txt", []byte("Running MovieHome() after 3 minutes"), "logs", "append")
 		https.MovieHome()
+
 	})
 }
 
