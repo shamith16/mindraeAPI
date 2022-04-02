@@ -60,11 +60,11 @@ type Images struct {
 }
 
 type imagesTypes struct {
-	AspectRatio float64     `json:"aspect_ratio"`
-	FilePath    string      `json:"file_path"`
-	Height      int         `json:"height"`
-	Iso6391     interface{} `json:"iso_639_1"`
-	VoteAverage int         `json:"vote_average"`
-	VoteCount   int         `json:"vote_count"`
-	Width       int         `json:"width"`
+	AspectRatio float64 `json:"aspect_ratio"`
+	FilePath    string  `json:"file_path"`
+	Height      int     `json:"height"`
+	Iso6391     string  `json:"iso_639_1"`
+	VoteAverage int     `json:"vote_average"`
+	VoteCount   int     `json:"vote_count"`
+	Width       int     `json:"width"`
 }

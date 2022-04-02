@@ -62,8 +62,7 @@ func TmdbMovieBrowse(name string, year string) (tmdbMovieBrowse tmdb.ShowMovieBr
 }
 
 func TmdbMovieSearch(id int) (tmdbMovieSearch tmdb.MovieSearch, err error) {
-	link := fmt.Sprintf("%s%d?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US&append_to_response=credits,external_ids,images,keywords,translations,videos",
-		constants.TmdbMovieSearchURL, id)
+	link := fmt.Sprintf("%s%d?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US&append_to_response=credits,external_ids,images,keywords,translations,videos&include_image_language=en,null", constants.TmdbMovieSearchURL, id)
 	response, err := http.Get(link)
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
