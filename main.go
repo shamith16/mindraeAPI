@@ -11,7 +11,7 @@ import (
 )
 
 const PORT = "3000"
-const MIN = 360
+const MIN = "360"
 
 //TODO Add Api endpoint to change cron via post
 
@@ -30,7 +30,7 @@ func main() {
 
 	c := cron.New()
 
-	c.AddFunc(string(MIN)+"* * * *", func() {
+	c.AddFunc(MIN+" * * * *", func() {
 		fmt.Println("Cron job started")
 		fetch.MovieHome()
 	})
@@ -38,9 +38,11 @@ func main() {
 	c.Start()
 
 	app.Static("/moviehome", "jsons/movie-home.json")
+	app.Static("/logs", "logs/logs.txt")
+
 	appPort := fmt.Sprintf(":%s", port)
-	_ = app.Listen(appPort)
 	_ = utils.WriteToFile("logs.txt", []byte(appPort), "logs", "append")
+	_ = app.Listen(appPort)
 }
 
 // Gets default value passed if no value exist for given environment variable.
