@@ -5,16 +5,25 @@ import (
 	"os"
 )
 
-func WriteToFile(filename string, data []byte) (err error) {
+func WriteToFile(filename string, data []byte, path string, operationType string) (err error) {
+	var permission int
+
+	switch {
+	case operationType == "append":
+		permission = os.O_WRONLY | os.O_TRUNC | os.O_CREATE | os.O_APPEND
+	case operationType == "new":
+		permission = os.O_WRONLY | os.O_TRUNC | os.O_CREATE
+	}
 
 	file, err := os.OpenFile(
-		"jsons/"+filename,
-		os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
+		path+filename,
+		permission,
 		0666,
 	)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	defer func(file *os.File) {
 		err := file.Close()
 		if err != nil {
@@ -28,6 +37,8 @@ func WriteToFile(filename string, data []byte) (err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	log.Printf("Wrote %d bytes.\n", bytesWritten)
+
 	return
 }
