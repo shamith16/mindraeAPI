@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-func TuneFindShowHome() (tunefindShowHome tunefind.ShowHome, err error) {
+func tuneFindShowHome() (tunefindShowHome tunefind.ShowHome, err error) {
 
 	response, err := http.Get(constants.TuneFindShowHome)
 	defer func(Body io.ReadCloser) {
@@ -34,7 +34,7 @@ func TuneFindShowHome() (tunefindShowHome tunefind.ShowHome, err error) {
 	}
 }
 
-func TuneFindMovieHome() (tunefindMovieHome tunefind.MovieGameHome, err error) {
+func tuneFindMovieHome() (tunefindMovieHome tunefind.MovieGameHome, err error) {
 
 	response, err := http.Get(constants.TuneFindMovieHome)
 	defer func(Body io.ReadCloser) {
@@ -58,7 +58,7 @@ func TuneFindMovieHome() (tunefindMovieHome tunefind.MovieGameHome, err error) {
 	}
 }
 
-func TuneFindGameHome() (tunefindGameHome tunefind.MovieGameHome, err error) {
+func tuneFindGameHome() (tunefindGameHome tunefind.MovieGameHome, err error) {
 
 	response, err := http.Get(constants.TuneFindGameHome)
 	defer func(Body io.ReadCloser) {
@@ -82,7 +82,7 @@ func TuneFindGameHome() (tunefindGameHome tunefind.MovieGameHome, err error) {
 	}
 }
 
-func TuneFindShowBrowse() (tunefindShowBrowse tunefind.ShowBrowse, err error) {
+func tuneFindShowBrowse() (tunefindShowBrowse tunefind.ShowBrowse, err error) {
 
 	response, err := http.Get(constants.TuneFindBrowseAllShow)
 	defer func(Body io.ReadCloser) {
@@ -106,7 +106,7 @@ func TuneFindShowBrowse() (tunefindShowBrowse tunefind.ShowBrowse, err error) {
 	}
 }
 
-func TuneFindMovieBrowse() (tunefindMovieBrowse tunefind.MovieBrowse, err error) {
+func tuneFindMovieBrowse() (tunefindMovieBrowse tunefind.MovieBrowse, err error) {
 
 	response, err := http.Get(constants.TuneFindBrowseAllMovie)
 	defer func(Body io.ReadCloser) {
@@ -130,7 +130,7 @@ func TuneFindMovieBrowse() (tunefindMovieBrowse tunefind.MovieBrowse, err error)
 	}
 }
 
-func TuneFindGameBrowse() (tunefindGameBrowse tunefind.GameBrowse, err error) {
+func tuneFindGameBrowse() (tunefindGameBrowse tunefind.GameBrowse, err error) {
 
 	response, err := http.Get(constants.TuneFindBrowseAllGame)
 	defer func(Body io.ReadCloser) {
@@ -154,7 +154,7 @@ func TuneFindGameBrowse() (tunefindGameBrowse tunefind.GameBrowse, err error) {
 	}
 }
 
-func TuneFindMovieSearch(movieName string) (tuneFindMovieSearch tunefind.MovieSearch, err error) {
+func tuneFindMovieSearch(movieName string) (tuneFindMovieSearch tunefind.MovieSearch, err error) {
 
 	response, err := http.Get(constants.TuneFindMovieSearch + movieName + "?fields=song-events,hot-songs")
 	defer func(Body io.ReadCloser) {
@@ -178,7 +178,7 @@ func TuneFindMovieSearch(movieName string) (tuneFindMovieSearch tunefind.MovieSe
 	}
 }
 
-func TuneFindShowSearch(showName string) (tuneFindShowSearch tunefind.ShowSearch, err error) {
+func tuneFindShowSearch(showName string) (tuneFindShowSearch tunefind.ShowSearch, err error) {
 
 	response, err := http.Get(constants.TuneFindShowSearch + showName + "?fields=seasons&metatags=1")
 	defer func(Body io.ReadCloser) {
@@ -202,7 +202,7 @@ func TuneFindShowSearch(showName string) (tuneFindShowSearch tunefind.ShowSearch
 	}
 }
 
-func TuneFindSeasonSearch(showName string, seasonNumber int) (tuneFindSeasonSearch tunefind.SeasonSearch, err error) {
+func tuneFindSeasonSearch(showName string, seasonNumber int) (tuneFindSeasonSearch tunefind.SeasonSearch, err error) {
 
 	response, err := http.Get(constants.TuneFindSeasonSearch + showName + "/season/" + strconv.Itoa(seasonNumber) + "?fields=episodes,theme-song,hot-songs,albums&metatags=1")
 	defer func(Body io.ReadCloser) {
@@ -226,7 +226,7 @@ func TuneFindSeasonSearch(showName string, seasonNumber int) (tuneFindSeasonSear
 	}
 }
 
-func TuneFindEpisodeSearch(episodeID int) (tuneFindEpisodeSearch tunefind.EpisodeSearch, err error) {
+func tuneFindEpisodeSearch(episodeID int) (tuneFindEpisodeSearch tunefind.EpisodeSearch, err error) {
 
 	response, err := http.Get(constants.TuneFindEpisodeSearch + strconv.Itoa(episodeID) + "?fields=song-events,questions,nextPrev")
 	defer func(Body io.ReadCloser) {
@@ -250,7 +250,7 @@ func TuneFindEpisodeSearch(episodeID int) (tuneFindEpisodeSearch tunefind.Episod
 	}
 }
 
-func TuneFindTrending() (tunefindTrending tunefind.TrendingSongs, err error) {
+func tuneFindTrending() (tunefindTrending tunefind.TrendingSongs, err error) {
 
 	response, err := http.Get(constants.TuneFindTrending)
 	defer func(Body io.ReadCloser) {

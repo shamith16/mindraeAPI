@@ -11,7 +11,7 @@ import (
 )
 
 //TmdbShowBrowse Search Movie By Name and select Relevant Movie Object from a list of Fetched Results
-func TmdbShowBrowse(name string) (tmdbShowBrowse tmdb.ShowMovieBrowse, err error) {
+func tmdbShowBrowse(name string) (tmdbShowBrowse tmdb.ShowMovieBrowse, err error) {
 	link := fmt.Sprintf("%s&query=%s", constants.TmdbShowBrowseURL, name)
 	response, err := http.Get(link)
 	defer func(Body io.ReadCloser) {
@@ -35,7 +35,7 @@ func TmdbShowBrowse(name string) (tmdbShowBrowse tmdb.ShowMovieBrowse, err error
 	}
 }
 
-func TmdbMovieBrowse(name string, year string) (tmdbMovieBrowse tmdb.ShowMovieBrowse, err error) {
+func tmdbMovieBrowse(name string, year string) (tmdbMovieBrowse tmdb.ShowMovieBrowse, err error) {
 	link := fmt.Sprintf("%s&query=%s&year=%s&primary_release_year=%s",
 		constants.TmdbMovieBrowseURL, name, year, year)
 	response, err := http.Get(link)
@@ -61,7 +61,7 @@ func TmdbMovieBrowse(name string, year string) (tmdbMovieBrowse tmdb.ShowMovieBr
 	}
 }
 
-func TmdbMovieSearch(id int) (tmdbMovieSearch tmdb.MovieSearch, err error) {
+func tmdbMovieSearch(id int) (tmdbMovieSearch tmdb.MovieSearch, err error) {
 	link := fmt.Sprintf("%s%d?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US&append_to_response=credits,external_ids,images,keywords,translations,videos&include_image_language=en,null", constants.TmdbMovieSearchURL, id)
 	response, err := http.Get(link)
 	defer func(Body io.ReadCloser) {
@@ -85,7 +85,7 @@ func TmdbMovieSearch(id int) (tmdbMovieSearch tmdb.MovieSearch, err error) {
 	}
 }
 
-func TmdbShowSearch(showID int) (tmdbShowSearch *tmdb.ShowSearch, err error) {
+func tmdbShowSearch(showID int) (tmdbShowSearch *tmdb.ShowSearch, err error) {
 	link := fmt.Sprintf("%s%d?api_key=2caaa89866fe5b08fcab57571825d956&language=en-US&append_to_response=credits,episode_groups,external_ids,images,keywords,translations,videos",
 		constants.TmdbShowURL, showID)
 	response, err := http.Get(link)
@@ -110,7 +110,7 @@ func TmdbShowSearch(showID int) (tmdbShowSearch *tmdb.ShowSearch, err error) {
 	}
 }
 
-func TmdbSeasonSearch(showID int, seasonNumber int) (tmdbSeasonSearch *tmdb.SeasonSearch, err error) {
+func tmdbSeasonSearch(showID int, seasonNumber int) (tmdbSeasonSearch *tmdb.SeasonSearch, err error) {
 	link := fmt.Sprintf("%s%d/season/%d?%s%s",
 		constants.TmdbShowURL, showID, seasonNumber, constants.TmdbApiKey, constants.TmdbLanguage)
 	response, err := http.Get(link)
@@ -135,7 +135,7 @@ func TmdbSeasonSearch(showID int, seasonNumber int) (tmdbSeasonSearch *tmdb.Seas
 	}
 }
 
-func TmdbEpisodeSearch(showID int, seasonNumber int, episodeNumber int) (tmdbEpisodeSearch *tmdb.Episodes, err error) {
+func tmdbEpisodeSearch(showID int, seasonNumber int, episodeNumber int) (tmdbEpisodeSearch *tmdb.Episodes, err error) {
 	link := fmt.Sprintf("%s%d/season/%d/episode/%d?%s%s", constants.TmdbShowURL, showID, seasonNumber, episodeNumber, constants.TmdbApiKey, constants.TmdbLanguage)
 	response, err := http.Get(link)
 	defer func(Body io.ReadCloser) {

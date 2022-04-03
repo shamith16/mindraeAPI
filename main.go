@@ -18,9 +18,8 @@ const MIN = "360"
 func init() {
 	os.Setenv("TZ", "Asia/Kolkata")
 	time.AfterFunc(3*time.Minute, func() {
-		_ = utils.WriteToFile("logs.txt", []byte("Running MovieHome() after 3 minutes"), "logs", "append")
+		_ = utils.WriteToFile("logs.txt", []byte("Running MovieHome() after 3 minutes"), "log/", "append")
 		fetch.MovieHome()
-
 	})
 }
 
@@ -37,11 +36,14 @@ func main() {
 
 	c.Start()
 
-	app.Static("/moviehome", "jsons/movie-home.json")
-	app.Static("/logs", "logs/logs.txt")
+	app.Static("/moviehome", "json/movie-home.json")
+
+	app.Static("/log", "log/logs.txt")
 
 	appPort := fmt.Sprintf(":%s", port)
-	_ = utils.WriteToFile("logs.txt", []byte(appPort), "logs", "append")
+
+	_ = utils.WriteToFile("logs.txt", []byte("Server is running at port"+appPort+"\n"), "log/", "append")
+
 	_ = app.Listen(appPort)
 }
 

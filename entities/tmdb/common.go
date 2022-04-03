@@ -64,7 +64,7 @@ type imagesTypes struct {
 	FilePath    string  `json:"file_path"`
 	Height      int     `json:"height"`
 	Iso6391     string  `json:"iso_639_1"`
-	VoteAverage int     `json:"vote_average"`
+	VoteAverage float64 `json:"vote_average"`
 	VoteCount   int     `json:"vote_count"`
 	Width       int     `json:"width"`
 }

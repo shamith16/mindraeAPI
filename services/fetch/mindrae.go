@@ -3,16 +3,15 @@ package fetch
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
-	"regexp"
-	"time"
-
 	"github.com/shamith16/mindraeAPI/constants"
 	"github.com/shamith16/mindraeAPI/entities/mindrae"
 	"github.com/shamith16/mindraeAPI/entities/tmdb"
 	"github.com/shamith16/mindraeAPI/entities/tunefind"
 	"github.com/shamith16/mindraeAPI/utils"
+	"net/http"
+	"net/url"
+	"regexp"
+	"time"
 )
 
 /*
@@ -21,12 +20,21 @@ import (
 
 func MovieHome() {
 	now := time.Now()
+
 	var movieList []string
+
 	var listOfMovie []mindrae.Movie
+
 	var logs []string
 
+	beginLog := fmt.Sprintf("MovieHome Started at %v\n", now)
+
+	logs = append(logs, beginLog)
+
 	var sleepTime = 15
+
 	var totalSongs int
+
 	var totalTime = func(t time.Time, logs []string) {
 		until := time.Until(t)
 		l := fmt.Sprintf("Total Time taken is: %v\n", until.Minutes())
@@ -35,13 +43,14 @@ func MovieHome() {
 	}
 
 	var filterMovies = func(tunefind *tunefind.MovieSearch) (isMatched bool) {
+
 		re := regexp.MustCompile(` \(aka.*`).ReplaceAll([]byte(tunefind.Movie.Name), []byte(""))
 
 		name := url.QueryEscape(string(re))
 
 		year := utils.YearStripper(tunefind.Movie.ReleaseDate)
 
-		tmdbMovieBrowse, err := TmdbMovieBrowse(name, year)
+		tmdbMovieBrowse, err := tmdbMovieBrowse(name, year)
 		if err != nil {
 			curErr := fmt.Sprintf("Error occurred at function MovieHome() TmdbMovieBrowse() is nil: %s\n", err)
 			fmt.Println(curErr)
@@ -88,7 +97,7 @@ func MovieHome() {
 		}
 
 		if isMatched {
-			tmdbMovie, err = TmdbMovieSearch(matchedResult.Id)
+			tmdbMovie, err = tmdbMovieSearch(matchedResult.Id)
 			if err != nil {
 				curErr := fmt.Sprintf("Error occurred at function MovieHome() TmdbMovieSearch() is nil: %s\n", err)
 				fmt.Println(curErr)
@@ -139,6 +148,7 @@ func MovieHome() {
 		}
 		return
 	}
+
 	var songLinkFetcher = func(movie *tunefind.MovieSearch) {
 		//TODO: Handle link if any not present
 		//TODO: itunes and apple music are essentially same Optimise it
@@ -200,17 +210,22 @@ func MovieHome() {
 		logs = append(logs, a)
 
 	}
-	var addStringToList = func(listAppendTo []string, strList ...[]string) {
+
+	var addStringToList = func(listAppendTo *[]string, strList ...[]string) {
 		for _, strings := range strList {
 			for _, s := range strings {
-				listAppendTo = append(listAppendTo, s)
+				*listAppendTo = append(*listAppendTo, s)
 			}
 		}
 	}
+
 	a := fmt.Sprintf("Fetching TuneFindMovieHome Started At: %s\n", now)
+
 	fmt.Println(a)
+
 	logs = append(logs, a)
-	tunefindMovieHome, err := TuneFindMovieHome()
+
+	tunefindMovieHome, err := tuneFindMovieHome()
 	if err != nil {
 		curErr := fmt.Sprintf("Error occurred at function MovieHome() TunefindMovieHome() is nil: %s\n", err)
 		fmt.Println(curErr)
@@ -219,17 +234,17 @@ func MovieHome() {
 		return
 	}
 
-	addStringToList(movieList, tunefindMovieHome.Slider, tunefindMovieHome.Featured, tunefindMovieHome.RecentlyAdded)
+	fmt.Println("Error not nil " + tunefindMovieHome.Movies[0].Name)
 
-	{
-		movieListLen := fmt.Sprintf("Total Number To Movies to be fetched from tunefind is: %d\n", len(movieList))
-		fmt.Println(movieListLen)
-		logs = append(logs, movieListLen)
-	}
+	addStringToList(&movieList, tunefindMovieHome.Slider, tunefindMovieHome.Featured, tunefindMovieHome.RecentlyAdded)
+
+	movieListLen := fmt.Sprintf("Total Number To Movies to be fetched from tunefind is: %d\n", len(movieList))
+	fmt.Println(movieListLen)
+	logs = append(logs, movieListLen)
 
 	for _, movie := range movieList {
 
-		tunefindMovieSearch, err := TuneFindMovieSearch(movie)
+		tunefindMovieSearch, err := tuneFindMovieSearch(movie)
 		if err != nil {
 			curErr := fmt.Sprintf("Error occurred at function MovieHome() TunefindMovieSearch() is nil: %s\n", err)
 			fmt.Println(curErr)
@@ -263,7 +278,8 @@ func MovieHome() {
 	}
 
 	var movieHome = mindrae.MovieHome{Movies: listOfMovie}
-	a = fmt.Sprintf("Total Number of movies matched is: %d", len(movieList)-len(listOfMovie))
+
+	a = fmt.Sprintf("Total Number of movies matched out of %d is %d: %d\n", len(movieList), len(listOfMovie))
 	fmt.Println(a)
 	logs = append(logs, a)
 	marshal, err := json.Marshal(movieHome)
@@ -275,7 +291,7 @@ func MovieHome() {
 		return
 	}
 
-	err = utils.WriteToFile("movie-home.json", marshal, "jsons", "new")
+	err = utils.WriteToFile("movie-home.json", marshal, "json/", "new")
 	if err != nil {
 		curErr := fmt.Sprintf("Error occurred at function MovieHome() Writing to file: %s\n", err)
 		fmt.Println(curErr)
@@ -284,11 +300,7 @@ func MovieHome() {
 		return
 	}
 
-	var ctx []byte
-	for _, s := range logs {
-		ctx = append(ctx, []byte(s)...)
-	}
-	_ = utils.WriteToFile("logs.txt", ctx, "logs", "append")
+	_ = utils.WriteToFile("logs.txt", logs, "log/", "append")
 	finished := fmt.Sprintf("Fetching Movie List took: %v", time.Until(now))
 	fmt.Println(finished)
 	logs = append(logs, finished)
