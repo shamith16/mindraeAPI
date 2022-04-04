@@ -24,15 +24,17 @@ type MovieSearch struct {
 	Video           bool              `json:"video"`
 	VoteAverage     float64           `json:"vote_average"`
 	VoteCount       int               `json:"vote_count"`
-	Credits         struct {
-		Cast []Cast `json:"cast"`
-	} `json:"credits"`
-	ExternalIds ExternalIds `json:"external_ids"`
-	Images      Images      `json:"images,omitempty"`
+	Credits         Credits           `json:"credits"`
+	ExternalIds     ExternalIds       `json:"external_ids"`
+	Images          Images            `json:"images,omitempty"`
 
 	Videos Videos `json:"videos"`
 }
 
 type Videos struct {
 	Results []VideoResults `json:"results"`
+}
+
+type Credits struct {
+	Cast []Cast `json:"cast"`
 }

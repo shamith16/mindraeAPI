@@ -23,19 +23,19 @@ type Movie struct {
 }
 
 type Event struct {
-	ID                int64       `json:"id"`
-	EventGroupID      int64       `json:"event_group_id"`
-	Name              string      `json:"name"`
-	Number            interface{} `json:"number"`
-	AirDate           int64       `json:"air_date"`
-	PublicationDate   interface{} `json:"publication_date"`
-	Locked            bool        `json:"locked"`
-	Description       interface{} `json:"description"`
-	AirdateDay        string      `json:"airdate_day"`
-	AirdateMonth      string      `json:"airdate_month"`
-	AirdateMonthShort string      `json:"airdate_month_short"`
-	AirdateYear       string      `json:"airdate_year"`
-	IsAired           bool        `json:"is_aired"`
-	SongsCount        int64       `json:"songs_count"`
-	EventGroup        EventGroup  `json:"event_group"`
+	ID                int64      `json:"id"`
+	EventGroupID      int64      `json:"event_group_id"`
+	Name              string     `json:"name"`
+	Number            string     `json:"number"`
+	AirDate           int64      `json:"air_date"`
+	PublicationDate   string     `json:"publication_date"`
+	Locked            bool       `json:"locked"`
+	Description       string     `json:"description"`
+	AirdateDay        string     `json:"airdate_day"`
+	AirdateMonth      string     `json:"airdate_month"`
+	AirdateMonthShort string     `json:"airdate_month_short"`
+	AirdateYear       string     `json:"airdate_year"`
+	IsAired           bool       `json:"is_aired"`
+	SongsCount        int64      `json:"songs_count,omitempty"`
+	EventGroup        EventGroup `json:"event_group"`
 }

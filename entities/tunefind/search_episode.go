@@ -5,37 +5,37 @@ type EpisodeSearch struct {
 }
 
 type EpisodeSearchEpisode struct {
-	ID                int64  `json:"id"`
-	EventGroupID      int64  `json:"event_group_id"`
-	Name              string `json:"name"`
-	Number            int64  `json:"number"`
-	AirDate           int64  `json:"air_date"`
-	Locked            bool   `json:"locked"`
-	Description       string `json:"description"`
-	AirdateDay        string `json:"airdate_day"`
-	AirdateMonth      string `json:"airdate_month"`
-	AirdateMonthShort string `json:"airdate_month_short"`
-	AirdateYear       string `json:"airdate_year"`
-	IsAired           bool   `json:"is_aired"`
-
-	EventGroup EventGroup    `json:"event_group"`
-	SongEvents []SongEvent   `json:"song_events"`
-	Next       Next          `json:"next"`
-	Previous   Next          `json:"previous"`
-	Votes      []interface{} `json:"votes"`
+	ID                int64         `json:"id"`
+	EventGroupID      int64         `json:"event_group_id"`
+	Name              string        `json:"name"`
+	Number            int64         `json:"number"`
+	AirDate           int64         `json:"air_date"`
+	Locked            bool          `json:"locked"`
+	Description       string        `json:"description"`
+	AirdateDay        string        `json:"airdate_day"`
+	AirdateMonth      string        `json:"airdate_month"`
+	AirdateMonthShort string        `json:"airdate_month_short"`
+	AirdateYear       string        `json:"airdate_year"`
+	IsAired           bool          `json:"is_aired"`
+	EventGroup        EventGroup    `json:"event_group"`
+	SongEvents        []SongEvent   `json:"song_events"`
+	Next              Next          `json:"next"`
+	Previous          Next          `json:"previous"`
+	Votes             []interface{} `json:"votes"`
 }
 
 type EventGroup struct {
-	ID            int64       `json:"id"`
-	Name          string      `json:"name"`
-	NameStub      string      `json:"name_stub"`
-	GroupName     string      `json:"group_name"`
-	GroupSequence int64       `json:"group_sequence"`
-	Type          string      `json:"type"`
-	SongID        interface{} `json:"song_id"`
-	AirDateStart  int64       `json:"air_date_start"`
-	AirDateEnd    int64       `json:"air_date_end"`
-	TypeFull      string      `json:"type_full"`
+	ID            int64  `json:"id"`
+	Name          string `json:"name"`
+	NameStub      string `json:"name_stub"`
+	GroupName     string `json:"group_name"`
+	GroupSequence int64  `json:"group_sequence"`
+	Type          string `json:"type"`
+	SongID        int    `json:"song_id"`
+	AirDateStart  int64  `json:"air_date_start"`
+	AirDateEnd    int64  `json:"air_date_end"`
+	TypeFull      string `json:"type_full"`
+	Image         Image  `json:"image"`
 }
 
 type Next struct {
@@ -94,6 +94,7 @@ type Artist struct {
 	ID       int64  `json:"id"`
 	Name     string `json:"name"`
 	NameStub string `json:"name_stub"`
+	Image    Image  `json:"image"`
 }
 
 type URL struct {
