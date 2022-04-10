@@ -3,7 +3,7 @@ package tmdbapi
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/shamith16/mindraeAP/constants"
+	"github.com/shamith16/mindraeAPI/constants"
 	"github.com/shamith16/mindraeAPI/entities/tmdbmodel"
 	"io"
 	"io/ioutil"
