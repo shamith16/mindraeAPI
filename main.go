@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/robfig/cron"
-	"github.com/shamith16/mindraeAPI/services/fetch"
+	"github.com/shamith16/mindraeAPI/services/fetch/mindraeapi"
 	"github.com/shamith16/mindraeAPI/utils"
 	"os"
 	"time"
@@ -16,10 +16,10 @@ const MIN = "360"
 //TODO Add Api endpoint to change cron via post
 
 func init() {
-	os.Setenv("TZ", "Asia/Kolkata")
+	_ = os.Setenv("TZ", "Asia/Kolkata")
 	time.AfterFunc(3*time.Minute, func() {
-		_ = utils.WriteToFile("logs.txt", []byte("Running MovieHome() after 3 minutes"), "log/", "append")
-		fetch.MovieHome()
+		_ = utils.WriteToFile("logs.txt", []byte("Running Home() after 3 minutes"), "log/", "append")
+		mindraeapi.MovieHome()
 	})
 }
 
@@ -29,9 +29,9 @@ func main() {
 
 	c := cron.New()
 
-	c.AddFunc(MIN+" * * * *", func() {
+	_ = c.AddFunc(MIN+" * * * *", func() {
 		fmt.Println("Cron job started")
-		fetch.MovieHome()
+		mindraeapi.MovieHome()
 	})
 
 	c.Start()
