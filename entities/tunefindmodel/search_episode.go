@@ -1,5 +1,7 @@
 package tunefindmodel
 
+import "encoding/json"
+
 type EpisodeSearch struct {
 	Episode EpisodeSearchEpisode `json:"episode"`
 }
@@ -55,23 +57,23 @@ type Next struct {
 }
 
 type SongEvent struct {
-	ID                 int64  `json:"id"`
-	SongID             int64  `json:"song_id"`
-	EventID            int64  `json:"event_id"`
-	DateCreated        string `json:"date_created"`
-	UserID             string `json:"user_id"`
-	Position           int64  `json:"position"`
-	DescriptionHistory string `json:"description_history,omitempty"`
-	IsRight            bool   `json:"is_right"`
-	IsWrong            bool   `json:"is_wrong"`
-	IsForVote          bool   `json:"is_for_vote"`
-	Link               string `json:"link"`
-	Locked             bool   `json:"locked"`
-	Description        string `json:"description"`
-	IsSeasonOnly       bool   `json:"is_season_only"`
-	AlbumID            string `json:"album_id,omitempty,omitempty"`
-	AlbumSongNo        string `json:"album_song_no,omitempty,omitempty"`
-	Song               Song   `json:"song"`
+	ID                 int64       `json:"id"`
+	SongID             int64       `json:"song_id"`
+	EventID            int64       `json:"event_id"`
+	DateCreated        string      `json:"date_created"`
+	UserID             string      `json:"user_id"`
+	Position           int64       `json:"position"`
+	DescriptionHistory string      `json:"description_history,omitempty"`
+	IsRight            bool        `json:"is_right"`
+	IsWrong            bool        `json:"is_wrong"`
+	IsForVote          bool        `json:"is_for_vote"`
+	Link               string      `json:"link"`
+	Locked             bool        `json:"locked"`
+	Description        string      `json:"description"`
+	IsSeasonOnly       bool        `json:"is_season_only"`
+	AlbumID            string      `json:"album_id,omitempty,omitempty"`
+	AlbumSongNo        json.Number `json:"album_song_no,omitempty,omitempty"`
+	Song               Song        `json:"song"`
 }
 
 type Song struct {

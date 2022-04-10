@@ -17,7 +17,7 @@ const MIN = "360"
 
 func init() {
 	_ = os.Setenv("TZ", "Asia/Kolkata")
-	time.AfterFunc(3*time.Minute, func() {
+	time.AfterFunc(1*time.Minute, func() {
 		_ = utils.WriteToFile("logs.txt", []byte("Running Home() after 3 minutes"), "log/", "append")
 		mindraeapi.MovieHome()
 	})

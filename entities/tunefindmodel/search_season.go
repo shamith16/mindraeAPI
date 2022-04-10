@@ -1,5 +1,7 @@
 package tunefindmodel
 
+import "encoding/json"
+
 type SeasonSearch struct {
 	Season    Season         `json:"season"`
 	Episodes  []Episode      `json:"episodes"`
@@ -8,10 +10,10 @@ type SeasonSearch struct {
 }
 
 type Image struct {
-	Src     string `json:"src"`
-	Width   int    `json:"width"`
-	Height  int    `json:"height"`
-	Version string `json:"version"`
+	Src     string      `json:"src"`
+	Width   json.Number `json:"width"`
+	Height  json.Number `json:"height"`
+	Version string      `json:"version"`
 }
 
 type Season struct {
