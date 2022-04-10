@@ -1,10 +1,10 @@
-package tunefind
+package tunefindmodel
 
 type SeasonSearch struct {
-	Season    Season    `json:"season"`
-	Episodes  []Episode `json:"episodes"`
-	ThemeSong ThemeSong `json:"theme_song"`
-	HotSongs  []HotSong `json:"hot_songs"`
+	Season    Season         `json:"season"`
+	Episodes  []Episode      `json:"episodes"`
+	ThemeSong ThemeHotSong   `json:"theme_song"`
+	HotSongs  []ThemeHotSong `json:"hot_songs"`
 }
 
 type Image struct {
@@ -30,7 +30,7 @@ type Season struct {
 	EpisodesCount    int                         `json:"episodes_count,omitempty"`
 	MusicSupervisors []MusicSupervisorsComposers `json:"music_supervisors,omitempty"`
 	Composers        []MusicSupervisorsComposers `json:"composers,omitempty"`
-	ThemeSong        ThemeSong                   `json:"theme_song,omitempty"`
+	ThemeSong        ThemeHotSong                `json:"theme_song,omitempty"`
 }
 
 type Episode struct {
@@ -51,29 +51,14 @@ type Episode struct {
 	SongsCount        int        `json:"songs_count"`
 }
 
-type ThemeSong struct {
-	Id         int      `json:"id"`
-	Name       string   `json:"name"`
-	NameStub   string   `json:"name_stub"`
-	Album      string   `json:"album"`
-	PreviewUrl string   `json:"preview_url"`
-	Url        URL      `json:"url"`
-	Amazon     string   `json:"amazon"`
-	Applemusic string   `json:"applemusic"`
-	Itunes     string   `json:"itunes"`
-	Spotify    string   `json:"spotify"`
-	Youtube    string   `json:"youtube"`
-	Artists    []Artist `json:"artists"`
-}
-
-type HotSong struct {
-	Id         int      `json:"id"`
-	Name       string   `json:"name"`
-	NameStub   string   `json:"name_stub"`
-	Album      string   `json:"album"`
-	PreviewUrl string   `json:"preview_url"`
-	Url        URL      `json:"url"`
-	Amazon     string   `json:"amazon"`
+type ThemeHotSong struct {
+	Id         int    `json:"id"`
+	Name       string `json:"name"`
+	NameStub   string `json:"name_stub"`
+	Album      string `json:"album"`
+	PreviewUrl string `json:"preview_url"`
+	Url        URL    `json:"url"`
+	//	Amazon     string   `json:"amazon"`
 	Applemusic string   `json:"applemusic"`
 	Itunes     string   `json:"itunes"`
 	Spotify    string   `json:"spotify"`

@@ -1,4 +1,4 @@
-package tmdb
+package tmdbmodel
 
 type ShowSearch struct {
 	Adult            bool              `json:"adult"`
@@ -56,13 +56,13 @@ type Seasons struct {
 }
 
 type EpisodeGroupsResults struct {
-	Description  string      `json:"description"`
-	EpisodeCount int         `json:"episode_count"`
-	GroupCount   int         `json:"group_count"`
-	Id           string      `json:"id"`
-	Name         string      `json:"name"`
-	Network      interface{} `json:"network"`
-	Type         int         `json:"type"`
+	Description  string `json:"description"`
+	EpisodeCount int    `json:"episode_count"`
+	GroupCount   int    `json:"group_count"`
+	Id           string `json:"id"`
+	Name         string `json:"name"`
+	Network      string `json:"network,omitempty"`
+	Type         int    `json:"type"`
 }
 
 type EpisodeGroups struct {

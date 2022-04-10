@@ -1,4 +1,4 @@
-package tunefind
+package tunefindmodel
 
 type TrendingSongs struct {
 	Songs []Songs `json:"songs"`

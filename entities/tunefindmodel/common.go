@@ -1,4 +1,4 @@
-package tunefind
+package tunefindmodel
 
 type Games struct {
 	ReleaseDate string `json:"release_date,omitempty"`

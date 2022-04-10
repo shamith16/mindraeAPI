@@ -1,4 +1,4 @@
-package tmdb
+package tmdbmodel
 
 import "time"
 
@@ -15,7 +15,7 @@ type Cast struct {
 	Name               string  `json:"name"`
 	OriginalName       string  `json:"original_name"`
 	Popularity         float64 `json:"popularity"`
-	ProfilePath        *string `json:"profile_path"`
+	ProfilePath        string  `json:"profile_path"`
 	CastId             int     `json:"cast_id,omitempty"`
 	Character          string  `json:"character"`
 	CreditId           string  `json:"credit_id"`

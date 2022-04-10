@@ -1,4 +1,4 @@
-package tmdb
+package tmdbmodel
 
 type Episodes struct {
 	AirDate        string  `json:"air_date"`

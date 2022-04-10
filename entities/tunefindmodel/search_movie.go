@@ -1,4 +1,4 @@
-package tunefind
+package tunefindmodel
 
 type MovieSearch struct {
 	Movie      Movie       `json:"movie"`

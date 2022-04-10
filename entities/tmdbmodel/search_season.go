@@ -1,4 +1,4 @@
-package tmdb
+package tmdbmodel
 
 type SeasonSearch struct {
 	Id           string     `json:"_id"`

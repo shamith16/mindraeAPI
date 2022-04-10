@@ -1,4 +1,4 @@
-package tunefind
+package tunefindmodel
 
 type ShowHome struct {
 	Shows        []ShowMovies `json:"shows"`

@@ -1,4 +1,4 @@
-package tunefind
+package tunefindmodel
 
 type MovieGameHome struct {
 	Slider        []string     `json:"slider,omitempty"`

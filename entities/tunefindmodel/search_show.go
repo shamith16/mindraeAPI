@@ -1,4 +1,4 @@
-package tunefind
+package tunefindmodel
 
 type ShowSearch struct {
 	Show          Show     `json:"show"`
