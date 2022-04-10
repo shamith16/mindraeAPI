@@ -45,13 +45,13 @@ func MovieHome() {
 			//var amazon string
 
 			if totalSongs <= 1 {
-				sleepTime = 2
+				sleepTime = 4
 			} else if totalSongs <= 10 {
 				sleepTime = 8
 			} else if totalSongs > 10 && totalSongs <= 15 {
-				sleepTime = 13
+				sleepTime = 15
 			} else if totalSongs > 15 {
-				sleepTime = 18
+				sleepTime = 19
 			}
 
 			RedirectHandler := func(req *http.Request, via []*http.Request, times int) error {
