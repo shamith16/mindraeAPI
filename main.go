@@ -17,8 +17,8 @@ const MIN = "360"
 
 func init() {
 	_ = os.Setenv("TZ", "Asia/Kolkata")
-	time.AfterFunc(1*time.Minute, func() {
-		_ = utils.WriteToFile("logs.txt", []byte("Running Home() after 3 minutes"), "log/", "append")
+	time.AfterFunc(3*time.Minute, func() {
+		utils.Logger("Running Home() after 3 minutes\n", "main.go")
 		mindraeapi.MovieHome()
 	})
 }
@@ -38,11 +38,18 @@ func main() {
 
 	app.Static("/moviehome", "json/movie-home.json")
 
-	app.Static("/log", "log/logs.txt")
+	app.Static("/log", "./log", fiber.Static{
+		Compress:  true,
+		ByteRange: true,
+		Browse:    true,
+		Download:  true,
+		MaxAge:    3600,
+		Next:      nil,
+	})
 
 	appPort := fmt.Sprintf(":%s", port)
 
-	_ = utils.WriteToFile("logs.txt", []byte("Server is running at port"+appPort+"\n"), "log/", "append")
+	utils.Logger("Server is running at port"+appPort+"\n", "main.go")
 
 	_ = app.Listen(appPort)
 }
