@@ -11,9 +11,9 @@ import (
 )
 
 func MovieSearch(name string, year string) (tmdbMovieBrowse tmdbmodel.ShowMovieBrowse, err error) {
-
-	link := fmt.Sprintf("%s&query=%s&year=%s&primary_release_year=%s",
-		constants.TmdbMovieBrowseURL, name, year, year)
+	//&primary_release_year=%s,year
+	link := fmt.Sprintf("%s&query=%s&year=%s",
+		constants.TmdbMovieBrowseURL, name, year)
 
 	response, err := http.Get(link)
 
