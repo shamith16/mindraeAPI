@@ -15,14 +15,9 @@ import (
 	"time"
 )
 
-func songFetcher(event *tunefindmodel.SongEvent, wg *sync.WaitGroup) {
+func songFetcher(event tunefindmodel.SongEvent, wg *sync.WaitGroup) (spotify, applemusic, itunes, youtube string) {
 
 	defer wg.Done()
-
-	var spotify string
-	var applemusic string
-	var itunes string
-	var youtube string
 
 	RedirectHandler := func(req *http.Request, via []*http.Request, times int) error {
 		err := fmt.Errorf("redirect policy: stopped after %d times", times)
@@ -49,11 +44,7 @@ func songFetcher(event *tunefindmodel.SongEvent, wg *sync.WaitGroup) {
 	you, _ := client.Get(constants.TunefindBaseURL + event.Song.Youtube)
 	youtube = you.Header.Get("location")
 
-	event.Song.Spotify = spotify
-	event.Song.Applemusic = applemusic
-	event.Song.Itunes = itunes
-	event.Song.Youtube = youtube
-
+	return
 }
 
 func addStringToList(listAppendTo *[]string, strList ...[]string) {
@@ -71,6 +62,10 @@ func addToLog(s string, Name string) {
 
 func eventsLinkFetcher(events *tunefindmodel.MovieSearch, sleepTime *int, totalSongs int, routeName string) {
 
+	var (
+		s, a, itu, y string
+	)
+
 	if totalSongs <= 1 {
 		*sleepTime = 4
 	} else if totalSongs <= 10 {
@@ -82,8 +77,13 @@ func eventsLinkFetcher(events *tunefindmodel.MovieSearch, sleepTime *int, totalS
 	}
 
 	wg.Add(totalSongs)
-	for _, event := range events.SongEvents {
-		songFetcher(&event, &wg)
+	for i := range events.SongEvents {
+		s, a, itu, y = songFetcher(events.SongEvents[i], &wg)
+		events.SongEvents[i].Song.Spotify = s
+		events.SongEvents[i].Song.Applemusic = a
+		events.SongEvents[i].Song.Itunes = itu
+		events.SongEvents[i].Song.Youtube = y
+
 	}
 	wg.Wait()
 
