@@ -2,6 +2,7 @@ package mindraeapi
 
 import (
 	"fmt"
+	tmdb "github.com/cyruzin/golang-tmdb"
 	"github.com/shamith16/mindraeAPI/constants"
 	"github.com/shamith16/mindraeAPI/entities/mindraemodel"
 	"github.com/shamith16/mindraeAPI/entities/tmdbmodel"
@@ -9,16 +10,24 @@ import (
 	"github.com/shamith16/mindraeAPI/services/fetch/tmdbapi"
 	"github.com/shamith16/mindraeAPI/utils"
 	"net/http"
-	"net/url"
 	"regexp"
-	"sync"
 	"time"
 )
 
-func songFetcher(event tunefindmodel.SongEvent, wg *sync.WaitGroup) (spotify, applemusic, itunes, youtube string) {
+func addStringToList(listAppendTo *[]string, strList ...[]string) {
+	for _, strings := range strList {
+		for _, s := range strings {
+			*listAppendTo = append(*listAppendTo, s)
+		}
+	}
+}
 
-	defer wg.Done()
+func addToLog(s string, Name string) {
+	fmt.Println(s)
+	utils.Logger(s, Name)
+}
 
+func songFetcher(event tunefindmodel.SongEvent) (spotify, applemusic, itunes, youtube string) {
 	RedirectHandler := func(req *http.Request, via []*http.Request, times int) error {
 		err := fmt.Errorf("redirect policy: stopped after %d times", times)
 		if len(via) >= times {
@@ -47,19 +56,6 @@ func songFetcher(event tunefindmodel.SongEvent, wg *sync.WaitGroup) (spotify, ap
 	return
 }
 
-func addStringToList(listAppendTo *[]string, strList ...[]string) {
-	for _, strings := range strList {
-		for _, s := range strings {
-			*listAppendTo = append(*listAppendTo, s)
-		}
-	}
-}
-
-func addToLog(s string, Name string) {
-	fmt.Println(s)
-	utils.Logger(s, Name)
-}
-
 func eventsLinkFetcher(events *tunefindmodel.MovieSearch, sleepTime *int, totalSongs int, routeName string) {
 
 	var (
@@ -67,7 +63,7 @@ func eventsLinkFetcher(events *tunefindmodel.MovieSearch, sleepTime *int, totalS
 	)
 
 	if totalSongs <= 1 {
-		*sleepTime = 4
+		*sleepTime = 6
 	} else if totalSongs <= 10 {
 		*sleepTime = 8
 	} else if totalSongs > 10 && totalSongs <= 15 {
@@ -75,18 +71,14 @@ func eventsLinkFetcher(events *tunefindmodel.MovieSearch, sleepTime *int, totalS
 	} else if totalSongs > 15 {
 		*sleepTime = 19
 	}
-
-	wg.Add(totalSongs)
 	for i := range events.SongEvents {
-		s, a, itu, y = songFetcher(events.SongEvents[i], &wg)
+		s, a, itu, y = songFetcher(events.SongEvents[i])
 		events.SongEvents[i].Song.Spotify = s
 		events.SongEvents[i].Song.Applemusic = a
 		events.SongEvents[i].Song.Itunes = itu
 		events.SongEvents[i].Song.Youtube = y
 
 	}
-	wg.Wait()
-
 	for i := range events.HotSongs {
 		for i2 := range events.SongEvents {
 			if events.HotSongs[i].Name == events.SongEvents[i2].Song.Name {
@@ -100,17 +92,20 @@ func eventsLinkFetcher(events *tunefindmodel.MovieSearch, sleepTime *int, totalS
 
 }
 
-func filterMovies(tunefind *tunefindmodel.MovieSearch, listOfMovie *[]mindraemodel.Movie, routeName string) (isMatched bool) {
+func filterMovie(tunefind *tunefindmodel.MovieSearch, listOfMovie *[]mindraemodel.Movie, routeName string) (isMatched bool) {
 
 	sleepTime := 0
+	isMatched = false
 
 	re := regexp.MustCompile(` \(aka.*`).ReplaceAll([]byte(tunefind.Movie.Name), []byte(""))
 
-	name := url.QueryEscape(string(re))
+	name := string(re)
 
 	year := utils.YearStripper(tunefind.Movie.ReleaseDate)
 
-	tmdbMovieSearch, err := tmdbapi.MovieSearch(name, year)
+	tmdbMovieSearch, err := tmdbapi.SearchTmdbMovie(name, map[string]string{
+		"year": year,
+	})
 	if err != nil {
 		addToLog(fmt.Sprintf("Error occurred at function Home() MovieSearch() is nil: %s\n", err), routeName)
 		return
@@ -118,18 +113,15 @@ func filterMovies(tunefind *tunefindmodel.MovieSearch, listOfMovie *[]mindraemod
 
 	listOfTResults := tmdbMovieSearch.Results
 
-	isMatched = false
-
 	var (
-		matchedResult tmdbmodel.MovieBrowseResult
-		tmdbMovie     tmdbmodel.MovieSearch
+		matchedResult tmdbmodel.SearchMovieResult
+		tmdbMovie     tmdb.MovieDetails
 	)
 
 	addToLog(fmt.Sprintf("Total Number of Results for movie %s is: %d\n", name, tmdbMovieSearch.TotalResults), routeName)
 
 	if tmdbMovieSearch.TotalResults == 0 {
 		addToLog(fmt.Sprintf("Movie %s not found in tmdbMovie skipping it\n", name), routeName)
-
 	} else {
 		for _, result := range listOfTResults {
 			if result.ReleaseDate[:4] == tunefind.Movie.ReleaseDate[:4] {
@@ -147,17 +139,20 @@ func filterMovies(tunefind *tunefindmodel.MovieSearch, listOfMovie *[]mindraemod
 	}
 
 	if isMatched {
-		tmdbMovie, err = tmdbapi.MovieSearchById(matchedResult.Id)
+		tmdbMovie, err = tmdbapi.GetMovieDetails(int(matchedResult.ID))
 		if err != nil {
 			addToLog(fmt.Sprintf("Error occurred at function Home() MovieSearchById() is nil: %s\n", err), routeName)
 			return
 		}
+
 		totalSongs := len(tunefind.SongEvents)
 		addToLog(fmt.Sprintf("Calling TunefindSongLinkFetcher total number of songs for %s movie is %d\n", tunefind.Movie.Name, totalSongs), routeName)
 		eventsLinkFetcher(tunefind, &sleepTime, totalSongs, routeName)
+
 		addToLog(fmt.Sprintf("Current sleep time is: %d\n", sleepTime), routeName)
 		time.Sleep(time.Duration(sleepTime) * time.Second)
-		*listOfMovie = append(*listOfMovie, mindraemodel.Movie{
+
+		tunefind := mindraemodel.TuneFind{
 			TuneFindId:            tunefind.Movie.ID,
 			TuneFindName:          tunefind.Movie.Name,
 			TuneFindNameStub:      tunefind.Movie.NameStub,
@@ -172,31 +167,13 @@ func filterMovies(tunefind *tunefindmodel.MovieSearch, listOfMovie *[]mindraemod
 			TuneFindIsAired:       tunefind.Movie.Event.IsAired,
 			SongEvents:            tunefind.SongEvents,
 			HotSongs:              tunefind.HotSongs,
-			TmdbIsAdult:           tmdbMovie.Adult,
-			TmdbBackDropPath:      tmdbMovie.BackdropPath,
-			TmdbBudget:            int64(tmdbMovie.Budget),
-			Genres:                tmdbMovie.Genres,
-			MovieHomePageUrl:      tmdbMovie.Homepage,
-			TmdbId:                int64(tmdbMovie.Id),
-			ImdbId:                tmdbMovie.ImdbId,
-			OriginalLanguage:      tmdbMovie.OriginalLanguage,
-			OriginalTitle:         tmdbMovie.OriginalTitle,
-			MovieOverview:         tmdbMovie.Overview,
-			Popularity:            tmdbMovie.Popularity,
-			PosterPath:            tmdbMovie.PosterPath,
-			TmdbReleaseDate:       tmdbMovie.ReleaseDate,
-			Revenue:               int64(tmdbMovie.Revenue),
-			Runtime:               int64(tmdbMovie.Runtime),
-			TmdbStatus:            tmdbMovie.Status,
-			TagLine:               tmdbMovie.Tagline,
-			Title:                 tmdbMovie.Title,
-			Video:                 tmdbMovie.Video,
-			VoteAverage:           tmdbMovie.VoteAverage,
-			VoteCount:             int64(tmdbMovie.VoteCount),
-			ExternalIds:           tmdbMovie.ExternalIds,
-			Videos:                tmdbMovie.Videos,
-			Images:                tmdbMovie.Images,
+		}
+		*listOfMovie = append(*listOfMovie, mindraemodel.Movie{
+			TuneFind: tunefind,
+			Tmdb:     tmdbMovie,
 		})
+
 	}
+
 	return
 }
