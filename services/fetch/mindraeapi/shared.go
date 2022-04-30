@@ -103,9 +103,7 @@ func filterMovie(tunefind *tunefindmodel.MovieSearch, listOfMovie *[]mindraemode
 
 	year := utils.YearStripper(tunefind.Movie.ReleaseDate)
 
-	tmdbMovieSearch, err := tmdbapi.SearchTmdbMovie(name, map[string]string{
-		"year": year,
-	})
+	tmdbMovieSearch, err := tmdbapi.SearchTmdbMovie(name, nil)
 	if err != nil {
 		addToLog(fmt.Sprintf("Error occurred at function Home() MovieSearch() is nil: %s\n", err), routeName)
 		return
@@ -126,9 +124,7 @@ func filterMovie(tunefind *tunefindmodel.MovieSearch, listOfMovie *[]mindraemode
 		for _, result := range listOfTResults {
 			if result.ReleaseDate[:4] == tunefind.Movie.ReleaseDate[:4] {
 				addToLog(fmt.Sprintf("%s Movie is matched using Year %s\n", name, year), routeName)
-
 				isMatched = true
-
 				matchedResult = result
 				break
 			} else {

@@ -24,10 +24,10 @@ func init() {
 }
 func GetMovieDetails(movieId int) (tmdbMovieDetails tmdb.MovieDetails, err error) {
 	options := map[string]string{
-		"include_video_language": "en",
+		//"include_video_language": "en",
 		"include_image_language": "en",
-		//alternative_titles,changes,external_ids,keywords,lists,recommendations,reviews,similar,translations,
-		"append_to_response": "credits,images,release_dates,videos,watch/providers",
+		//alternative_titles,changes,external_ids,keywords,lists,recommendations,reviews,similar,translations,credits,,videos,watch/providers,release_dates
+		"append_to_response": "images",
 	}
 
 	tmdbMovie, err := tmdbClient.GetMovieDetails(movieId, options)
